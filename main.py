@@ -1,13 +1,12 @@
 import random
 
-#introduction - welcome's users and explains the application
+#introduction - welcomes users and explains the application
 def introduction():
-    print('Are you located in Wisconsin and looking for something to do?') 
-    print('You\'ve come to the right place! I will generate a destination, mode of transportation, activity, and restaurant.') 
+    print('Welcome to the Wisconsin Day Trip Generator! I will generate a destination, mode of transportation, activity, and restaurant.') 
     print('Don\'t like an option? No problem! You can swap it out for another.')
     print('Let\'s get started!')
 
-#generate the initial random option
+#generate the initial random options
 def generate_random_option(list):
     option_index = random.randint(0, len(list) - 1) 
     option = list[option_index]
@@ -40,7 +39,7 @@ def user_confirm_option(initial_option, list, list_type):
 def confirm_trip(final_trip):
     confirmed_status = False
     while confirmed_status == False:
-        user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}').upper()
+        user_confirmation = input(f'Please confirm your trip details. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}. Y to confirm, N to decline. ').upper()
         if user_confirmation != 'N' and user_confirmation != 'Y': 
             print('Please enter Y or N')
         elif user_confirmation == 'Y':
@@ -48,7 +47,7 @@ def confirm_trip(final_trip):
             print(f'Your destination is {final_trip[0]} where you will arrive by {final_trip[1]}. While in {final_trip[0]}, you will enjoy your day by {final_trip[2]} and finish the day with a meal at {final_trip[3]}.')
             confirmed_status = True
         elif user_confirmation == 'N':
-            print('Sorry to hear you didn\'t confirm, please start over.')
+            print('Sorry to hear you didn\'t confirm, please start over to generate a new trip.')
             confirmed_status = True
 
 #call the introduction
