@@ -13,22 +13,27 @@ def generate_random_option(list):
     option = list[option_index]
     return option
 
-#get approval/final option from user
-#BUG: need to fix issue where random generator can give user the option they just declined 
+#get final option & approval from user - including regeneration of options if they do not approve
 #BUG: need to fix issue where if user inputs text other than Y/N, the application stops - need to handle for exception
-def user_confirm_option(current_option, list, list_type):
-    option = current_option
-    option_index = ''
+def user_confirm_option(initial_option, list, list_type):
+    option = initial_option
+    option_index = list.index(option)
     user_approval = ''
     approval = False
+    print(f'The {list_type} we have picked for you is {option}')
+    user_approval = input("Do you approve? Y/N ") 
+    if user_approval == 'Y':
+        approval = True
     while approval == False:
-        option_index = random.randint(0, len(list) - 1) 
+        popped_value = list.pop(option_index)
+        option_index = random.randint(0, len(list) - 1)
         option = list[option_index]
+        list.append(popped_value)
         print(f'The {list_type} we have picked for you is {option}')
         user_approval = input("Do you approve? Y/N ")
         if user_approval == 'Y':
             approval = True
-        else: 
+        elif user_approval != 'N': 
             print('Please enter Y or N')
             user_approval = input("Do you approve? Y/N")
     return option
@@ -41,7 +46,7 @@ def confirm_trip(final_trip):
         print('Thank you for confirming.')
         print(f'Your destination is {final_trip[0]} where you will arrive by {final_trip[1]}. While in {final_trip[0]}, you will enjoy your day by {final_trip[2]} and finish the day with a meal at {final_trip[3]}.')
     elif user_confirmation == 'N':
-        print('Boo - please start over.')
+        print('Sorry to hear you didn\'t confirm, please start over.')
     else: 
         print('Please enter Y or N')
         user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}')
