@@ -14,15 +14,16 @@ def generate_random_option(list):
     return option
 
 #get final option & approval from user - including regeneration of options if they do not approve
-#BUG: need to fix issue where if user inputs text other than Y/N, the application stops - need to handle for exception
 def user_confirm_option(initial_option, list, list_type):
     option = initial_option
     option_index = list.index(option)
     user_approval = ''
     approval = False
     print(f'The {list_type} we have picked for you is {option}')
-    user_approval = input("Do you approve? Y/N ") 
-    if user_approval == 'Y':
+    user_approval = input("Do you approve? Y/N ").upper() 
+    if user_approval != 'N' and user_approval != 'Y': 
+            print('Please enter Y or N. Regenerating option...')
+    elif user_approval == 'Y':
         approval = True
     while approval == False:
         popped_value = list.pop(option_index)
@@ -30,35 +31,34 @@ def user_confirm_option(initial_option, list, list_type):
         option = list[option_index]
         list.append(popped_value)
         print(f'The {list_type} we have picked for you is {option}')
-        user_approval = input("Do you approve? Y/N ")
+        user_approval = input("Do you approve? Y/N ").upper()
         if user_approval == 'Y':
             approval = True
-        elif user_approval != 'N': 
-            print('Please enter Y or N')
-            user_approval = input("Do you approve? Y/N")
     return option
 
 #confirm trip. if use confirms, print the final itinerary, if they do not confirm, prompt them to start over)
-#BUG: need to fix issue where if user inputs text other than Y/N, the application stops - need to handle for exception
 def confirm_trip(final_trip):
-    user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}')
-    if user_confirmation == 'Y':
-        print('Thank you for confirming.')
-        print(f'Your destination is {final_trip[0]} where you will arrive by {final_trip[1]}. While in {final_trip[0]}, you will enjoy your day by {final_trip[2]} and finish the day with a meal at {final_trip[3]}.')
-    elif user_confirmation == 'N':
-        print('Sorry to hear you didn\'t confirm, please start over.')
-    else: 
-        print('Please enter Y or N')
-        user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}')
+    confirmed_status = False
+    while confirmed_status == False:
+        user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}').upper()
+        if user_confirmation != 'N' and user_confirmation != 'Y': 
+            print('Please enter Y or N')
+        elif user_confirmation == 'Y':
+            print('Thank you for confirming.')
+            print(f'Your destination is {final_trip[0]} where you will arrive by {final_trip[1]}. While in {final_trip[0]}, you will enjoy your day by {final_trip[2]} and finish the day with a meal at {final_trip[3]}.')
+            confirmed_status = True
+        elif user_confirmation == 'N':
+            print('Sorry to hear you didn\'t confirm, please start over.')
+            confirmed_status = True
 
 #call the introduction
 introduction()
 
 #define lists/data for each input
 destinations = ['Chicago', 'Wisconsin Dells', 'Devil\'s Lake', 'Johnson Creek', 'Door County']
-transportations = ['Car', 'Bike', 'Bus', 'Train']
+transportations = ['Car', 'Bike', 'Bus', 'Train', 'Foot', 'Horse', 'Dogsled']
 entertainments = ['Hiking', 'Shopping', 'Swimming', 'Touring Winieries']
-restaurants = ['Joe\'s Pizza', 'Joe\'s Chinese', 'Joe\'s Burgers', 'Joe\'s Greek', 'Joe\'s Tacos', 'Joe\'s Pasta']
+restaurants = ['Joe\'s Pizza', 'Joe\'s Chinese', 'Joe\'s Burgers', 'Joe\'s Greek', 'Joe\'s Tacos', 'Joe\'s Pasta', 'Joe\'s Steaks', 'Joe\'s Seafood']
 
 #define a list to hold the final trip option values
 daytrip_items = []
