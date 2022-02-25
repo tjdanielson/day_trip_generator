@@ -1,6 +1,11 @@
 import random
 
-#add an introduction!
+#introduction - welcome's users and explains the application
+def introduction():
+    print('Are you located in Wisconsin and looking for something to do?') 
+    print('You\'ve come to the right place! I will generate a destination, mode of transportation, activity, and restaurant.') 
+    print('Don\'t like an option? No problem! You can swap it out for another.')
+    print('Let\'s get started!')
 
 #generate the initial random option
 def generate_random_option(list):
@@ -20,7 +25,7 @@ def user_confirm_option(current_option, list, list_type):
         option_index = random.randint(0, len(list) - 1) 
         option = list[option_index]
         print(f'The {list_type} we have picked for you is {option}')
-        user_approval = input("Do you approve? Y/N")
+        user_approval = input("Do you approve? Y/N ")
         if user_approval == 'Y':
             approval = True
         else: 
@@ -40,6 +45,9 @@ def confirm_trip(final_trip):
     else: 
         print('Please enter Y or N')
         user_confirmation = input(f'Please confirm your trip. Y to confirm, N to decline. Destination: {final_trip[0]}, Transportation: {final_trip[1]}, Entertainment: {final_trip[2]}, Restaurant: {final_trip[3]}')
+
+#call the introduction
+introduction()
 
 #define lists/data for each input
 destinations = ['Chicago', 'Wisconsin Dells', 'Devil\'s Lake', 'Johnson Creek', 'Door County']
