@@ -35,7 +35,7 @@ def user_confirm_option(initial_option, list, list_type):
             approval = True
     return option
 
-#confirm trip. if use confirms, print the final itinerary, if they do not confirm, prompt them to start over)
+#confirm trip. if user confirms, print the final itinerary, if they do not confirm, prompt them to start over
 def confirm_trip(final_trip):
     confirmed_status = False
     while confirmed_status == False:
@@ -68,19 +68,19 @@ initial_transportation = generate_random_option(transportations)
 initial_entertainment = generate_random_option(entertainments)
 initial_restaurant = generate_random_option(restaurants)
 
-#confirm destination (if declined, regeneration a random option)
+#confirm destination (if declined, regenerate a new random option)
 final_destination = user_confirm_option(initial_destination, destinations, 'destination')
 daytrip_items.append(final_destination)
 
-#confirm transportation (if declined, regeneration a random option)
+#confirm transportation (if declined, regenerate a new random option)
 final_transportation = user_confirm_option(initial_transportation, transportations, 'transportation')
 daytrip_items.append(final_transportation)
 
-#confirm entertainment (if declined, regeneration a random option)
+#confirm entertainment (if declined, regenerate a new random option)
 final_entertainment = user_confirm_option(initial_entertainment, entertainments, 'entertainment')
 daytrip_items.append(final_entertainment)
 
-#confirm restaurant (if declined, regeneration a random option)
+#confirm restaurant (if declined, regenerate a new random option)
 final_restaurant = user_confirm_option(initial_restaurant, restaurants, 'restaurant')
 daytrip_items.append(final_restaurant)
 
