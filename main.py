@@ -50,8 +50,28 @@ def confirm_trip(final_trip):
             print('Sorry to hear you didn\'t confirm, please start over to generate a new trip.')
             confirmed_status = True
 
-#call the introduction
-introduction()
+def run_daytrip_generator():
+    introduction()
+    #generate initial recommendations for user
+    initial_destination = generate_random_option(destinations)
+    initial_transportation = generate_random_option(transportations)
+    initial_entertainment = generate_random_option(entertainments)
+    initial_restaurant = generate_random_option(restaurants)
+    #confirm destination (if declined, regenerate a new random option)
+    final_destination = user_confirm_option(initial_destination, destinations, 'destination')
+    daytrip_items.append(final_destination)
+    #confirm transportation (if declined, regenerate a new random option)
+    final_transportation = user_confirm_option(initial_transportation, transportations, 'transportation')
+    daytrip_items.append(final_transportation)
+    #confirm entertainment (if declined, regenerate a new random option)
+    final_entertainment = user_confirm_option(initial_entertainment, entertainments, 'entertainment')
+    daytrip_items.append(final_entertainment)
+    #confirm restaurant (if declined, regenerate a new random option)
+    final_restaurant = user_confirm_option(initial_restaurant, restaurants, 'restaurant')
+    daytrip_items.append(final_restaurant)
+    #confirm the whole trip with the user - if they approve, print the trip description, if they decline, tell them to start over
+    confirm_trip(daytrip_items)
+
 
 #define lists/data for each input
 destinations = ['Chicago', 'Wisconsin Dells', 'Devil\'s Lake', 'Johnson Creek', 'Door County']
@@ -62,28 +82,5 @@ restaurants = ['Joe\'s Pizza', 'Joe\'s Chinese', 'Joe\'s Burgers', 'Joe\'s Greek
 #define a list to hold the final trip option values
 daytrip_items = []
 
-#generate initial recommendations for user
-initial_destination = generate_random_option(destinations)
-initial_transportation = generate_random_option(transportations)
-initial_entertainment = generate_random_option(entertainments)
-initial_restaurant = generate_random_option(restaurants)
-
-#confirm destination (if declined, regenerate a new random option)
-final_destination = user_confirm_option(initial_destination, destinations, 'destination')
-daytrip_items.append(final_destination)
-
-#confirm transportation (if declined, regenerate a new random option)
-final_transportation = user_confirm_option(initial_transportation, transportations, 'transportation')
-daytrip_items.append(final_transportation)
-
-#confirm entertainment (if declined, regenerate a new random option)
-final_entertainment = user_confirm_option(initial_entertainment, entertainments, 'entertainment')
-daytrip_items.append(final_entertainment)
-
-#confirm restaurant (if declined, regenerate a new random option)
-final_restaurant = user_confirm_option(initial_restaurant, restaurants, 'restaurant')
-daytrip_items.append(final_restaurant)
-
-#confirm the whole trip with the user - if they approve, print the trip description, if they decline, tell them to start over
-confirm_trip(daytrip_items)
-
+#run application
+run_daytrip_generator()
