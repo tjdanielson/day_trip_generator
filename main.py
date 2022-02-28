@@ -2,9 +2,7 @@ import random
 
 #introduction - welcomes users and explains the application
 def introduction():
-    print('Welcome to the Wisconsin Day Trip Generator! I will generate a destination, mode of transportation, activity, and restaurant.') 
-    print('Don\'t like an option? No problem! You can swap it out for another.')
-    print('Let\'s get started!')
+    print('Welcome to the Wisconsin Day Trip Generator! I will generate a destination, mode of transportation, activity, and restaurant.\nDon\'t like an option? No problem! You can swap it out for another.\nLet\'s get started!') 
 
 #generate the initial random options
 def generate_random_option(list):
